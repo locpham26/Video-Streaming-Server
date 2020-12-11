@@ -1,4 +1,5 @@
 const fs = require('fs')
+const path = require('path')
 const fsp = fs.promises;
 
 const buff = Buffer.alloc(100);
@@ -6,7 +7,7 @@ const header = Buffer.from("mvhd");
 
 module.exports = async (file) => {
     try {
-        const filePath = fs.realpathSync(`sampleVideos\\${file}`)
+        const filePath = `D:\\Github\\VideoSample\\${file}`
         const fileHandler = await fsp.open(filePath, "r");
         const { buffer } = await fileHandler.read(buff, 0, 100, 0);
         await fileHandler.close();
