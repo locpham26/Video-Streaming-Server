@@ -8,7 +8,7 @@ middleware(app)
 ErrorHandlingMiddleware(app)
 app.use('', mainControllers)
 
-let port = 8080
+let port = 3001
 app.listen(port, () => {
   console.log(`Listening on port ${port}`)
 })

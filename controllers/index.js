@@ -3,6 +3,7 @@ const asyncWrapper = require('../utilities/async-wrapper')
 
 const VideoService = require('../services')
 const videoService = new VideoService()
+const getFileLength = require('../utilities/getFileLength')
 
 const {NotFoundError} = require('../errors')
 
@@ -12,11 +13,12 @@ const {createGridFSReadStream} = require('../database/gridfs-service')
 
 router.post('/video', [GridFSMiddleware()], asyncWrapper(async (req, res) => {
   const {originalname, mimetype, id, size} = req.file
+  const fileLength = await getFileLength(req.file.originalname)
   await videoService.uploadVideo({
     title: req.body.title,
     author: req.body.author,
     url: `http://localhost:3001/video/mp4/${id}`,
-    length: req.body.length
+    length: fileLength
   })
   res.send({originalname, mimetype, id, size, title: req.body.title})
 }))
