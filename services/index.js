@@ -20,7 +20,7 @@ module.exports = class VideoService {
   }
 
   async getAllVideos() {
-    return Video.find({}, "_id title author url view length")
+    return Video.find({}, "_id title author url view length createdAt")
   }
 
   async getVideo(_id) {
